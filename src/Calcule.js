@@ -68,6 +68,7 @@ const Calcule = () => {
 
     const handleChangeLevel = (event) => {
         setLevel(event.target.value);
+        setCurrent(0);
     }
 
     const handleNextOperation = () => {
@@ -84,7 +85,8 @@ const Calcule = () => {
         }
     }
 
-    console.log(level);
+    const calculesFiltered = calcules.filter(c => c.level === level);
+
     return(
         <Paper style={{padding:'4em', height:'20em',display:'flex', flexDirection:'column'}}>
             
@@ -103,12 +105,13 @@ const Calcule = () => {
 
 
 
+
             <div style={{display:'flex'}}>
-                <Typography variant="h1" color={'red'}>{calcules.filter(c => c.level === level)[current]?.calcule}</Typography>
+                <Typography variant="h1" color={'red'}>{calculesFiltered[current]?.calcule}</Typography>
                 <div style={{flexGrow:1}}></div>
                 {
                     stage === 'result' ?
-                    <Typography variant="h1">{calcules.filter(c => c.level === level)[current]?.result}</Typography> :
+                    <Typography variant="h1">{calculesFiltered[current]?.result}</Typography> :
                     <Skeleton width={'20em'}></Skeleton>
                 }
 
